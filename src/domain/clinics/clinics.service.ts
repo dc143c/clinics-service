@@ -5,9 +5,11 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ClinicsService {
-  private readonly clinicRepository: ClinicRepository = new ClinicRepository(
-    new ProviderData(),
-  );
+  clinicRepository: ClinicRepository;
+
+  constructor() {
+    this.clinicRepository = new ClinicRepository(new ProviderData());
+  }
 
   public getAll(): Promise<Clinic[]> {
     return this.clinicRepository.findAll();

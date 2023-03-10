@@ -22,7 +22,7 @@ const PROVIDER_LIST = [
 
 @Module({})
 export class ProviderData {
-  public readonly providersDatabase: Clinic[] = [];
+  public providersDatabase: Clinic[] = [];
 
   constructor() {
     PROVIDER_LIST.forEach((provider) => {
@@ -58,12 +58,12 @@ export class ProviderData {
             }
           });
 
-          console.log(
-            '[' +
-              provider.PROVIDER_NAME +
-              ']' +
-              ' ✔ SUCCESS ON GATHERING INFORMATION FROM PROVIDER',
-          );
+          // console.log(
+          //   '[' +
+          //     provider.PROVIDER_NAME +
+          //     ']' +
+          //     ' ✔ SUCCESS ON GATHERING INFORMATION FROM PROVIDER',
+          // );
         })
         .catch((error) => {
           console.error(
