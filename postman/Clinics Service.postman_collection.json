@@ -270,7 +270,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/clinics/?availabilityTo=20:00&stateName=FL&name=Mayo Clinic",
+					"raw": "http://localhost:3000/api/v1/clinics/?userPreference=2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -284,20 +284,12 @@
 					],
 					"query": [
 						{
-							"key": "availabilityTo",
-							"value": "20:00"
-						},
-						{
-							"key": "stateName",
-							"value": "FL"
-						},
-						{
-							"key": "name",
-							"value": "Mayo Clinic"
+							"key": "userPreference",
+							"value": "2"
 						}
 					]
 				},
-				"description": "The response for this request must retrieve a 1 length array in the following configuration:\n\n```\n[\n    {\n        \"name\": \"Mayo Clinic\",\n        \"stateName\": \"Florida\",\n        \"availability\": {\n            \"from\": \"09:00\",\n            \"to\": \"20:00\"\n        }\n    }\n]\n```"
+				"description": "The response for this request must retrieve a denial object in the following configuration:\n\n```\n{\n    \"statusCode\": 400,\n    \"message\": [\n        \"property userPreference should not exist\"\n    ],\n    \"error\": \"Bad Request\"\n}\n```"
 			},
 			"response": []
 		}
