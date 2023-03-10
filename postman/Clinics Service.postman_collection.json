@@ -263,6 +263,43 @@
 				"description": "The response for this request must retrieve a 1 length array in the following configuration:\n\n```\n[\n    {\n        \"name\": \"Mayo Clinic\",\n        \"stateName\": \"Florida\",\n        \"availability\": {\n            \"from\": \"09:00\",\n            \"to\": \"20:00\"\n        }\n    }\n]\n```"
 			},
 			"response": []
+		},
+		{
+			"name": "GetByClinicNameStateNameAndAvailabilityTo Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/clinics/?availabilityTo=20:00&stateName=FL&name=Mayo Clinic",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"clinics",
+						""
+					],
+					"query": [
+						{
+							"key": "availabilityTo",
+							"value": "20:00"
+						},
+						{
+							"key": "stateName",
+							"value": "FL"
+						},
+						{
+							"key": "name",
+							"value": "Mayo Clinic"
+						}
+					]
+				},
+				"description": "The response for this request must retrieve a 1 length array in the following configuration:\n\n```\n[\n    {\n        \"name\": \"Mayo Clinic\",\n        \"stateName\": \"Florida\",\n        \"availability\": {\n            \"from\": \"09:00\",\n            \"to\": \"20:00\"\n        }\n    }\n]\n```"
+			},
+			"response": []
 		}
 	]
 }

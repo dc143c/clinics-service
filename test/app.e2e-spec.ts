@@ -1,4 +1,4 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Clinic } from '../src/shared/entities/Clinic';
 import { Test } from '@nestjs/testing';
 import { ClinicsServiceTest } from './domain/clinics.service';
@@ -42,6 +42,13 @@ describe('AppController', () => {
       .compile();
 
     app = moduleRef.createNestApplication();
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        transform: true,
+        forbidNonWhitelisted: true,
+      }),
+    );
     expect(clinicService).toBeDefined();
     await app.init();
   });
@@ -131,6 +138,16 @@ describe('AppController', () => {
       expect(req.body).toMatchObject(response);
       expect(req.status).toBe(200);
       return;
+    });
+  });
+
+  describe('/ [GET]', () => {
+    it('Verify application validation on wrong request', async () => {
+      const filters = { anythingToTry: '234' };
+      return await request(app.getHttpServer())
+        .get('/api/v1/clinics/')
+        .query(filters)
+        .expect(400);
     });
   });
 
