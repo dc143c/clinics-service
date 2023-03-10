@@ -1,0 +1,7 @@
+version: "3"
+services:
+  clinics-service:
+    image: clinics-service
+    ports:
+      - "3000:3000"
+ 

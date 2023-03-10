@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A [Nest](https://github.com/nestjs/nest) framework TypeScript based repository made as code challenge for mid back-end position at ScratchPay.
 
 ## Installation
 
@@ -58,16 +58,18 @@ $ yarn run test:e2e
 $ yarn run test:cov
 ```
 
-## Support
+## Docker initialization
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+# Building the docker image
+$ docker build -t clinics-service .
+
+# Starting docker containers
+$ docker-compose up -d
+```
 
 ## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Vênus Milo](https://github.com/dc143c)
 
 ## License
-
 Nest is [MIT licensed](LICENSE).
