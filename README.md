@@ -25,6 +25,7 @@
 ## Description
 
 A [Nest](https://github.com/nestjs/nest) framework TypeScript based repository made as code challenge for mid back-end position at ScratchPay.
+This application also has a complete documentation file for Postman. Check [this file](https://github.com/dc143c/clinics-service/tree/main/postman)
 
 ## Installation
 
@@ -32,7 +33,17 @@ A [Nest](https://github.com/nestjs/nest) framework TypeScript based repository m
 $ yarn install
 ```
 
-## Running the app
+## Docker initialization
+
+```bash
+# building the docker image
+$ docker build -t clinics-service .
+
+# starting docker containers
+$ docker-compose up -d
+```
+
+## Running the app without Docker
 
 ```bash
 # development
@@ -56,16 +67,6 @@ $ yarn run test:e2e
 
 # test coverage
 $ yarn run test:cov
-```
-
-## Docker initialization
-
-```bash
-# Building the docker image
-$ docker build -t clinics-service .
-
-# Starting docker containers
-$ docker-compose up -d
 ```
 
 ## Stay in touch
