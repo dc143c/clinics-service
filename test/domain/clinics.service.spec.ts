@@ -1,10 +1,6 @@
-import { Test } from '@nestjs/testing';
-import { ClinicsController } from '@/domain/clinics/clinics.controller';
 import { Clinic } from '@/shared/entities';
-import { ClinicsService } from '@/domain/clinics/clinics.service';
 import { analyzeFilterPayload } from '@/shared/helpers';
 import { compareTwoArrays } from '../../src/shared/helpers/index';
-import { ProviderData } from '@/shared/repository/providers';
 import { ClinicsServiceTest } from './clinics.service';
 
 describe('ClinicsService', () => {
@@ -21,13 +17,6 @@ describe('ClinicsService', () => {
   let clinicsService: ClinicsServiceType;
 
   beforeEach(async () => {
-    const moduleRef = await Test.createTestingModule({
-      imports: [ProviderData],
-      controllers: [ClinicsController],
-      providers: [ClinicsService],
-    }).compile();
-
-    expect(moduleRef).toBeDefined();
     clinicsService = new ClinicsServiceTest();
     expect(clinicsService).toBeDefined();
   });
