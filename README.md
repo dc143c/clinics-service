@@ -34,13 +34,14 @@ $ yarn install
 ```
 
 ## Docker initialization
+Running via docker requires a docker installation and docker-compose as well.
 
 ```bash
-# building the docker image
-$ docker build -t clinics-service .
+# running development environment
+$ yarn run docker:dev
 
-# starting docker containers
-$ docker-compose up -d
+# running production environment
+$ yarn run docker:prod
 ```
 
 ## Running the app without Docker
