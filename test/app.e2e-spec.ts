@@ -2,7 +2,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Clinic } from '../src/shared/entities/Clinic';
 import { Test } from '@nestjs/testing';
 import { ClinicsServiceTest } from './domain/clinics.service';
-import * as request from 'supertest';
+import request from 'supertest';
 import { ClinicsService } from '../src/domain/clinics/clinics.service';
 import { ProviderData } from '@/shared/repository/providers';
 import { ClinicsController } from '@/domain/clinics/clinics.controller';

@@ -1,30 +1,24 @@
 import axios from 'axios';
 import { Clinic } from '../../entities/Clinic';
-import { STATECODE_LIST } from '../constants';
 import { Module } from '@nestjs/common';
+import list from './list.json';
+import { fromObjectToClinic, verifyIfExist } from '@/shared/helpers';
 
-const PROVIDER_LIST = [
-  {
-    PROVIDER_URL:
-      'https://storage.googleapis.com/scratchpay-code-challenge/dental-clinics.json',
-    PROVIDER_NAME: 'Dental',
-    PROVIDER_METHOD: 'get',
-    PROVIDER_API_KEY: '',
-  },
-  {
-    PROVIDER_URL:
-      'https://storage.googleapis.com/scratchpay-code-challenge/vet-clinics.json',
-    PROVIDER_NAME: 'Vet',
-    PROVIDER_METHOD: 'get',
-    PROVIDER_API_KEY: '',
-  },
-];
+const PROVIDER_LIST = list;
 
 @Module({})
 export class ProviderData {
   public providersDatabase: Clinic[] = [];
 
   constructor() {
+    this.gatherDataFromProviders();
+  }
+
+  public getProvidersDatabase(): Clinic[] {
+    return this.providersDatabase;
+  }
+
+  private gatherDataFromProviders(): void {
     PROVIDER_LIST.forEach((provider) => {
       axios({
         method: provider.PROVIDER_METHOD,
@@ -35,35 +29,14 @@ export class ProviderData {
             }
           : {},
       })
-        .then((response) => {
+        .then(async (response) => {
           response.data.forEach((clinic: Clinic) => {
-            clinic = new Clinic(
-              Object.values(clinic)[0],
-              Object.values(clinic)[1],
-              Object.values(clinic)[2],
-            );
+            clinic = fromObjectToClinic(clinic);
 
-            if (clinic.getStateName().length == 2) {
-              clinic.setStateName(STATECODE_LIST[clinic.getStateName()]);
-            }
-
-            if (
-              this.providersDatabase.filter(
-                (item) =>
-                  item.getName() === clinic.getName() &&
-                  item.getStateName() === clinic.getStateName(),
-              ).length === 0
-            ) {
+            if (!verifyIfExist(clinic, this.providersDatabase)) {
               this.providersDatabase.push(clinic);
             }
           });
-
-          // console.log(
-          //   '[' +
-          //     provider.PROVIDER_NAME +
-          //     ']' +
-          //     ' ✔ SUCCESS ON GATHERING INFORMATION FROM PROVIDER',
-          // );
         })
         .catch((error) => {
           console.error(
@@ -71,15 +44,16 @@ export class ProviderData {
               provider.PROVIDER_NAME +
               ']' +
               ' ⚠ FAIL ON GATHERING INFORMATION FROM PROVIDER: ' +
-              '.\n',
-            error.code + '\n',
-            error.message,
+              error.code +
+              '\n',
           );
+
+          console.log('[WARNING] ⚠ Trying again in 10 seconds... \n');
+          setTimeout(() => {
+            console.log('Trying again...');
+            this.gatherDataFromProviders();
+          }, 10000);
         });
     });
-  }
-
-  public getProvidersDatabase(): Clinic[] {
-    return this.providersDatabase;
   }
 }
