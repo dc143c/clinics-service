@@ -1,15 +1,19 @@
 import { Clinic } from '@/shared/entities';
 import { STATECODE_LIST } from '../repository/constants';
 import { SearchClinicDTO } from '@/domain/clinics/dto/clinics.dto';
+import { ClinicsService } from '../../domain/clinics/clinics.service';
 
 /**
  * Description. This function is responsible for filtering the results parameter by the filtered parameter.
- * @param {any[]} filtered Filtered array containing the information that should be filtered.
- * @param {any[]} results Previous array containing all information gathered so far.
- * @return {any[]} Returns a new array where the results parameter is being filtered by the filtered parameter.
+ * @param {Clinic[]} filtered Filtered array containing the information that should be filtered.
+ * @param {Clinic[]} results Previous array containing all information gathered so far.
+ * @return {Clinic[]} Returns a new array where the results parameter is being filtered by the filtered parameter.
  */
-export function compareTwoArrays(filtered: any[], results: any[]): any[] {
-  const finalResults: any[] = [];
+export function compareTwoArrays(
+  filtered: Clinic[],
+  results: Clinic[],
+): Clinic[] {
+  const finalResults: Clinic[] = [];
 
   if (results.length === 0) {
     return filtered;
@@ -30,7 +34,7 @@ export function compareTwoArrays(filtered: any[], results: any[]): any[] {
  * Description. This function is responsible for filtering the results parameter by the filtered parameters outputing data from the service.
  * @param {SearchClinicDTO} filters Object containing information to be filtered.
  * @param {any[]} clinicsService Service being used for the filtering.
- * @return {any[]} Returns a new array where the results parameter is being filtered by the filtered parameters.
+ * @return {Clinic[]} Returns a new array where the results parameter is being filtered by the filtered parameters.
  */
 export async function analyzeFilterPayload(
   filters: SearchClinicDTO,
